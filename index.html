@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <title>Handlebars</title>
+</head>
+<body>
+    
+    <div class="container" id="container">
+        <h1>Countries</h1>
+        <div id="countries"></div>
+    </div>
+    <script src="node_modules/handlebars/dist/handlebars.min.js"></script>
+    <script id="myTemplate" type="text/x-handlebars">
+        <table class="table">
+            <thead>
+              <tr>
+                {{#each this.[0]}} <!-- Loop through first row to get column headings -->
+                  <th>
+                  {{@key}}
+                  </th>
+                {{/each}}
+
+              </tr>
+            </thead>
+            <tbody>
+                {{#each this}} <!-- Looping through each row -->
+                  <tr>
+                    {{#each this}}
+                      <td>{{this}}</td>
+                    {{/each}}
+                  </tr>
+                {{/each}}
+            </tbody>
+          </table>
+    </script>
+    <script>
+        var data = [
+  {
+    "Country / Area": "China[a]",
+    "UN continentalregion[4]": "Asia",
+    "UN statisticalsubregion[4]": "Eastern Asia",
+    "Population(1 July 2018)": 1427647786,
+    "Population(1 July 2019)": 1433783686,
+    "Change": "+0.43%"
+  },
+  {
+    "Country / Area": "India",
+    "UN continentalregion[4]": "Asia",
+    "UN statisticalsubregion[4]": "Southern Asia",
+    "Population(1 July 2018)": 1352642280,
+    "Population(1 July 2019)": 1366417754,
+    "Change": "+1.02%"
+  },
+  {
+    "Country / Area": "United States",
+    "UN continentalregion[4]": "Americas",
+    "UN statisticalsubregion[4]": "Northern America",
+    "Population(1 July 2018)": 327096265,
+    "Population(1 July 2019)": 329064917,
+    "Change": "+0.60%"
+  }
+];
+
+        var template = Handlebars.compile(document.getElementById('myTemplate').innerHTML);
+        console.log(template(data));
+        console.log(data);
+        container = document.getElementById('countries');
+        container.innerHTML = template(data);
+    </script>
+</body>
+</html>
